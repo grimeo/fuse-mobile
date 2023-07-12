@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "fuseFetcher",
+    "slug": "fuseFetcher",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
