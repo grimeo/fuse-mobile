@@ -46,8 +46,12 @@ export default function App() {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
       >
-        <LoginForm />
-        <SignUpForm />
+        <ScrollView>
+          <LoginForm />
+        </ScrollView>
+        <ScrollView>
+          <SignUpForm />
+        </ScrollView>
       </ScrollView>
     </View>
   );

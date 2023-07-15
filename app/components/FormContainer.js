@@ -1,10 +1,22 @@
 import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native";
 
 export default function FormContainer({ children }) {
   return (
     <>
-      <View style={styles.container}>{children}</View>
+      <KeyboardAvoidingView
+        enabled
+        behavior={Platform.OS === "ios" ? "padding" : null}
+        style={styles.container}
+      >
+        {children}
+      </KeyboardAvoidingView>
     </>
   );
 }

@@ -8,10 +8,10 @@ export default function SignUpForm() {
   return (
     <>
       <FormContainer>
-        <FormInput title="First Name" placeholder="Romeo" />
-        <FormInput title="Middle Name" placeholder="Pogi" />
-        <FormInput title="Last Name" placeholder="Always" />
-        <FormInput title="Email" placeholder="example@email.com" />
+        <FormInput title="First Name" placeholder="Juan" />
+        <FormInput title="Middle Name" placeholder="Martinez" />
+        <FormInput title="Last Name" placeholder="Dela Cruz" />
+        <FormInput title="Email" placeholder="juandelacruz@email.com" />
         <FormInput title="Password" placeholder="*********" />
         <FormInput title="Confirm Password" placeholder="*********" />
         <FormSubmitBtn title="SIgn Up" />
