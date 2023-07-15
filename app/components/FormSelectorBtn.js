@@ -1,12 +1,23 @@
 import React from "react";
-import { View, Text, TouchableWithoutFeedback, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Animated,
+} from "react-native";
 
-export default function FormSelectorBtn({ backgroundColor, style, textTitle }) {
+export default function FormSelectorBtn({
+  backgroundColor,
+  style,
+  textTitle,
+  onPress,
+}) {
   return (
-    <TouchableWithoutFeedback>
-      <View style={[styles.container, style, { backgroundColor }]}>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <Animated.View style={[styles.container, style, { backgroundColor }]}>
         <Text style={styles.text}>{textTitle}</Text>
-      </View>
+      </Animated.View>
     </TouchableWithoutFeedback>
   );
 }
