@@ -55,5 +55,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#1b1b33",
   },
-  tagline: { fontSize: 18, color: "1b1b33", textAlign: "center" },
+  tagline: { fontSize: 18, color: "#1b1b33", textAlign: "center" },
 });

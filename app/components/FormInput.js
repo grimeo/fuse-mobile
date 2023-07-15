@@ -1,14 +1,27 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import React from "react";
 
-export default function FormInput({ placeholder, title }) {
+export default FormInput = (props) => {
+  const { placeholder, label, error } = props;
+
   return (
-    <View>
-      <Text style={{ fontWeight: "bold" }}>{title}</Text>
-      <TextInput placeholder={placeholder} style={styles.input} />
-    </View>
+    <>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginBottom: 5,
+        }}
+      >
+        <Text style={{ fontWeight: "bold" }}>{label}</Text>
+        {error ? (
+          <Text style={{ color: "red", fontSize: 16 }}>{error}</Text>
+        ) : null}
+      </View>
+      <TextInput {...props} placeholder={placeholder} style={styles.input} />
+    </>
   );
-}
+};
 
 const styles = StyleSheet.create({
   input: {
