@@ -1,12 +1,48 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+  Dimensions,
+} from "react-native";
+import FormHead from "./app/components/FormHead";
+import FormSelectorBtn from "./app/components/FormSelectorBtn";
+import LoginForm from "./app/components/LoginForm";
+import SignUpForm from "./app/components/SignUpForm";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1, paddingTop: 60 }}>
+      <View style={{ height: 80 }}>
+        <FormHead
+          leftHead={"Welcome "}
+          rightHead={"Back"}
+          tagline={"wala paring tagline"}
+        />
+      </View>
+      <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
+        <FormSelectorBtn
+          style={styles.borderLeft}
+          backgroundColor="#666"
+          textTitle="Log in"
+        />
+
+        <FormSelectorBtn
+          style={styles.borderRight}
+          backgroundColor="#6668"
+          textTitle="Sign up"
+        />
+      </View>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+      >
+        <LoginForm />
+        <SignUpForm />
+      </ScrollView>
     </View>
   );
 }
@@ -18,4 +54,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  borderRight: { borderTopRightRadius: 8, borderBottomRightRadius: 8 },
+  borderLeft: { borderTopLeftRadius: 8, borderBottomLeftRadius: 8 },
 });
