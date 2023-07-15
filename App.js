@@ -22,7 +22,13 @@ export default function App() {
           tagline={"wala paring tagline"}
         />
       </View>
-      <View style={{ flexDirection: "row", paddingHorizontal: 20 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          paddingHorizontal: 20,
+          marginBottom: 20,
+        }}
+      >
         <FormSelectorBtn
           style={styles.borderLeft}
           backgroundColor="#666"
