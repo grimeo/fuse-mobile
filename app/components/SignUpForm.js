@@ -11,6 +11,8 @@ import { isValidEmail, isValidObjField, updateError } from "../utils/methods";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
+import client from "../api/client";
+
 const validationSchema = Yup.object({
   FirstName: Yup.string()
     .min(2, "Must be 2-20 characters.")
@@ -45,9 +47,9 @@ export default function SignUpForm() {
   const { FirstName, MiddleName, LastName, Email, Password, ConfirmPassword } =
     userInfo;
 
-  const handleOnChangeText = (value, fieldname) => {
-    setUserInfo({ ...userInfo, [fieldname]: value });
-  };
+  // const handleOnChangeText = (value, fieldname) => {
+  //   setUserInfo({ ...userInfo, [fieldname]: value });
+  // };
 
   const isValidForm = () => {
     //empty fields
@@ -87,20 +89,26 @@ export default function SignUpForm() {
     }
   };
 
+  const signUp = async (values, formikActions) => {
+    console.log(values);
+    try {
+      const res = await client.post("/create-user", { ...values });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // formikActions.resetForm();
+    // formikActions.setSubmitting(false);
+  };
+
   return (
     <>
       <FormContainer>
         <Formik
           initialValues={userInfo}
           validationSchema={validationSchema}
-          onSubmit={(values, formikActions) => {
-            console.log("log");
-            setTimeout(() => {
-              console.log(values);
-              formikActions.resetForm();
-              formikActions.setSubmitting(false);
-            }, 3000);
-          }}
+          onSubmit={signUp}
         >
           {({
             values,

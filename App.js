@@ -1,5 +1,5 @@
 import React from "react";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -11,12 +11,26 @@ import FormHead from "./app/components/FormHead";
 import FormSelectorBtn from "./app/components/FormSelectorBtn";
 import LoginForm from "./app/components/LoginForm";
 import SignUpForm from "./app/components/SignUpForm";
+import axios from "axios";
 
 const { width } = Dimensions.get("window");
 
 export default function App() {
   const animation = useRef(new Animated.Value(0)).current;
   const scrollview = useRef();
+
+  // const fetchApi = async () => {
+  //   try {
+  //     const res = await axios.get("http://192.168.43.6:4000/");
+  //     console.log(res.data);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchApi();
+  // }, []);
 
   const rightHeadOpac = animation.interpolate({
     inputRange: [0, width],
