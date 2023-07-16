@@ -7,20 +7,38 @@ import FormInput from "./FormInput";
 import FormSubmitBtn from "./FormSubmitBtn";
 import { isValidEmail, isValidObjField, updateError } from "../utils/methods";
 
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+import client from "../api/client";
+
+const validationSchema = Yup.object({
+  Email: Yup.string().email("Invalid Email.").required("Email is required."),
+  Password: Yup.string()
+    .trim()
+    .required("Password is required.")
+    .min(8, "Must be more than 7 characters"),
+});
+
 export default function loginForm() {
-  const [userInfo, setUserInfo] = useState({ Email: "", Password: "" });
+  // const [userInfo, setUserInfo] = useState({ Email: "", Password: "" });
+
+  const userInfo = {
+    Email: "",
+    Password: "",
+  };
 
   const [error, setError] = useState("");
 
   const { Email, Password } = userInfo;
 
-  const handleOnChangeText = (value, fieldname) => {
-    setUserInfo({ ...userInfo, [fieldname]: value });
-  };
+  // const handleOnChangeText = (value, fieldname) => {
+  //   setUserInfo({ ...userInfo, [fieldname]: value });
+  // };
 
   const isValidForm = () => {
     if (!isValidObjField(userInfo))
-      return updateError("Invalid Form.", setError);
+      return updateError("Invalid form.", setError);
     if (!isValidEmail(Email)) return updateError("Invalid Email.", setError);
     if (!Password.trim() || Password.length < 8)
       return updateError("Invalid Password");
@@ -28,10 +46,28 @@ export default function loginForm() {
     return true;
   };
 
-  const submitForm = () => {
-    if (isValidForm()) {
-      //submit
-      console.log(userInfo);
+  // const submitForm = () => {
+  //   if (isValidForm()) {
+  //     //submit
+  //     console.log(userInfo);
+  //   } else {
+  //     console.log("error occured while submitting the form.");
+  //   }
+  // };
+
+  const logIn = async (values, formikActions) => {
+    console.log(values);
+    try {
+      const res = await client.post("/sign-in", { ...values });
+      console.log(res.data);
+      const { success } = res.data;
+      if (!success) return updateError(res.data.message, setError);
+
+      formikActions.resetForm();
+      formikActions.setSubmitting(false);
+      //
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -49,22 +85,50 @@ export default function loginForm() {
             {error}
           </Text>
         ) : null}
-        <FormInput
-          autoCapitalize="none"
-          label="Email"
-          value={Email}
-          onChangeText={(value) => handleOnChangeText(value, "Email")}
-          placeholder="example@email.com"
-        />
-        <FormInput
-          autoCapitalize="none"
-          secureTextEntry
-          label="Password"
-          value={Password}
-          onChangeText={(value) => handleOnChangeText(value, "Password")}
-          placeholder="*********"
-        />
-        <FormSubmitBtn onPress={submitForm} label="Log in" />
+
+        <Formik
+          initialValues={userInfo}
+          validationSchema={validationSchema}
+          onSubmit={logIn}
+        >
+          {({
+            values,
+            errors,
+            touched,
+            isSubmitting,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+          }) => {
+            const { Email, Password } = values;
+            return (
+              <>
+                <FormInput
+                  value={Email}
+                  error={touched.Email && errors.Email}
+                  onBlur={handleBlur("Email")}
+                  onChangeText={handleChange("Email")}
+                  label="Email"
+                  placeholder="example@email.com"
+                />
+                <FormInput
+                  value={Password}
+                  error={touched.Password && errors.Password}
+                  onBlur={handleBlur("Password")}
+                  onChangeText={handleChange("Password")}
+                  secureTextEntry
+                  label="Password"
+                  placeholder="*********"
+                />
+                <FormSubmitBtn
+                  submitting={isSubmitting}
+                  onPress={handleSubmit}
+                  label="Log in"
+                />
+              </>
+            );
+          }}
+        </Formik>
       </FormContainer>
     </>
   );

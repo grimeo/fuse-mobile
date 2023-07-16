@@ -94,12 +94,11 @@ export default function SignUpForm() {
     try {
       const res = await client.post("/create-user", { ...values });
       console.log(res.data);
+      formikActions.resetForm();
+      formikActions.setSubmitting(false);
     } catch (error) {
       console.log(error);
     }
-
-    // formikActions.resetForm();
-    // formikActions.setSubmitting(false);
   };
 
   return (
