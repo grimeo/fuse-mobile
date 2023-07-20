@@ -2,9 +2,19 @@ import React, { useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import * as ImagePicker from "expo-image-picker";
+import client from "../api/client";
 
-function ImageUpload() {
+import { StackActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+
+function ImageUpload(props) {
+  const navigation = useNavigation();
+
+  const { token } = props.route.params;
+
   const [Avatar, setAvatar] = useState("");
+
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const pickImage = async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
@@ -22,8 +32,31 @@ function ImageUpload() {
     }
   };
 
-  const uploadAvatar = () => {
-    console.log(Avatar);
+  const uploadAvatar = async () => {
+    // console.log(Avatar);
+    const formData = new FormData();
+    formData.append("profile", {
+      name: new Date() + "_profile",
+      uri: Avatar,
+      type: "image/jpg",
+    });
+    try {
+      const res = await client.post("/upload-profile", formData, {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+          authorization: "JWT " + token,
+          // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGI0NDExNWNiMmY0ZThjNWUwMjllODMiLCJpYXQiOjE2ODk2MzYwMzQsImV4cCI6MTY4OTcyMjQzNH0.JY-wIC-m2ascHPtBpYsL7R4WgiWapYzamzqNZNOcsP8",
+        },
+      });
+      console.log(res.data);
+      console.log(token);
+      if (res.data.success) {
+        navigation.dispatch(StackActions.replace("UserProfile"));
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -44,7 +77,14 @@ function ImageUpload() {
             Upload
           </Text>
         ) : null}
-        <Text style={styles.skipBtn}>Skip</Text>
+        <Text
+          onPress={() => {
+            navigation.dispatch(StackActions.replace("PromptTypeOfUserScreen"));
+          }}
+          style={styles.skipBtn}
+        >
+          Skip
+        </Text>
       </View>
     </View>
   );

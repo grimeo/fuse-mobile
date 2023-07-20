@@ -2,15 +2,18 @@ import React, { useState } from "react";
 
 import { StyleSheet, Text, TextInput } from "react-native";
 
-import FormContainer from "./FormContainer";
-import FormInput from "./FormInput";
-import FormSubmitBtn from "./FormSubmitBtn";
+import FormContainer from "../components/FormContainer";
+import FormInput from "../components/FormInput";
+import FormSubmitBtn from "../components/FormSubmitBtn";
 import { isValidEmail, isValidObjField, updateError } from "../utils/methods";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 import client from "../api/client";
+
+import { StackActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const validationSchema = Yup.object({
   Email: Yup.string().email("Invalid Email.").required("Email is required."),
@@ -21,6 +24,8 @@ const validationSchema = Yup.object({
 });
 
 export default function loginForm() {
+  const navigation = useNavigation();
+
   // const [userInfo, setUserInfo] = useState({ Email: "", Password: "" });
 
   const userInfo = {
@@ -56,13 +61,13 @@ export default function loginForm() {
   // };
 
   const logIn = async (values, formikActions) => {
+    navigation.dispatch(StackActions.replace("HomeScreen"));
     console.log(values);
     try {
       const res = await client.post("/sign-in", { ...values });
       console.log(res.data);
       const { success } = res.data;
       if (!success) return updateError(res.data.message, setError);
-
       formikActions.resetForm();
       formikActions.setSubmitting(false);
       //

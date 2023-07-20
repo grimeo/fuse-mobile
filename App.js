@@ -7,120 +7,37 @@ import {
   View,
   Dimensions,
 } from "react-native";
-import FormHead from "./app/components/FormHead";
-import FormSelectorBtn from "./app/components/FormSelectorBtn";
-import LoginForm from "./app/components/LoginForm";
-import SignUpForm from "./app/components/SignUpForm";
-import axios from "axios";
-import ImageUpload from "./app/components/ImageUpload";
 
-const { width } = Dimensions.get("window");
+import AppFormScreen from "./app/screens/AppFormScreen";
+import ImageUploadScreen from "./app/screens/ImageUploadScreen";
+import ProfileScreen from "./app/screens/ProfileScreen";
+import PromptTypeOfUserScreen from "./app/screens/PromptTypeOfUserScreen";
+
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "./app/screens/HomeScreen";
+
+const Stack = createStackNavigator();
+
+const StackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen component={AppFormScreen} name="AppFormScreen" />
+      <Stack.Screen component={ImageUploadScreen} name="ImageUploadScreen" />
+      <Stack.Screen component={ProfileScreen} name="ProfileScreen" />
+      <Stack.Screen
+        component={PromptTypeOfUserScreen}
+        name="PromptTypeOfUserScreen"
+      />
+      <Stack.Screen component={HomeScreen} name="HomeScreen" />
+    </Stack.Navigator>
+  );
+};
 
 export default function App() {
-  const animation = useRef(new Animated.Value(0)).current;
-  const scrollview = useRef();
-
-  // const fetchApi = async () => {
-  //   try {
-  //     const res = await axios.get("http://192.168.43.6:4000/");
-  //     console.log(res.data);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchApi();
-  // }, []);
-
-  const rightHeadOpac = animation.interpolate({
-    inputRange: [0, width],
-    outputRange: [1, 0],
-  });
-
-  const leftHeadTranslate = animation.interpolate({
-    inputRange: [0, width],
-    outputRange: [0, 40],
-  });
-
-  const rightHeadTranslate = animation.interpolate({
-    inputRange: [0, width],
-    outputRange: [0, -60],
-  });
-
-  const loginColorInterpolate = animation.interpolate({
-    inputRange: [0, width],
-    outputRange: ["#666", "#6668"],
-  });
-
-  const signUpColorInterpolate = animation.interpolate({
-    inputRange: [0, width],
-    outputRange: ["#6668", "#666"],
-  });
-
-  // return (
-  //   <View style={{ flex: 1, paddingTop: 60 }}>
-  //     <View style={{ height: 80 }}>
-  //       <FormHead
-  //         leftHead={"Welcome "}
-  //         rightHead={"Back"}
-  //         tagline={"wala paring tagline"}
-  //         rightHeadOpac={rightHeadOpac}
-  //         leftHeadTranslate={leftHeadTranslate}
-  //         rightHeadTranslate={rightHeadTranslate}
-  //       />
-  //     </View>
-  //     <View
-  //       style={{
-  //         flexDirection: "row",
-  //         paddingHorizontal: 20,
-  //         marginBottom: 20,
-  //       }}
-  //     >
-  //       <FormSelectorBtn
-  //         style={styles.borderLeft}
-  //         backgroundColor={loginColorInterpolate}
-  //         textTitle="Log in"
-  //         onPress={() => scrollview.current.scrollTo({ x: 0 })}
-  //       />
-
-  //       <FormSelectorBtn
-  //         style={styles.borderRight}
-  //         backgroundColor={signUpColorInterpolate}
-  //         textTitle="Sign up"
-  //         onPress={() => scrollview.current.scrollTo({ x: width })}
-  //       />
-  //     </View>
-  //     <ScrollView
-  //       ref={scrollview}
-  //       horizontal
-  //       pagingEnabled
-  //       showsHorizontalScrollIndicator={false}
-  //       scrollEventThrottle={16}
-  //       onScroll={Animated.event(
-  //         [{ nativeEvent: { contentOffset: { x: animation } } }],
-  //         { useNativeDriver: false }
-  //       )}
-  //     >
-  //       <ScrollView>
-  //         <LoginForm />
-  //       </ScrollView>
-  //       <ScrollView>
-  //         <SignUpForm />
-  //       </ScrollView>
-  //     </ScrollView>
-  //   </View>
-  // );
-  return <ImageUpload />;
+  return (
+    <NavigationContainer>
+      <StackNavigator />
+    </NavigationContainer>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  borderRight: { borderTopRightRadius: 8, borderBottomRightRadius: 8 },
-  borderLeft: { borderTopLeftRadius: 8, borderBottomLeftRadius: 8 },
-});

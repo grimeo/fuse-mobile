@@ -3,15 +3,18 @@ import React from "react";
 import { useState } from "react";
 
 import { StyleSheet, Text } from "react-native";
-import FormContainer from "./FormContainer";
-import FormInput from "./FormInput";
-import FormSubmitBtn from "./FormSubmitBtn";
+import FormContainer from "../components/FormContainer";
+import FormInput from "../components/FormInput";
+import FormSubmitBtn from "../components/FormSubmitBtn";
 import { isValidEmail, isValidObjField, updateError } from "../utils/methods";
 
 import { Formik } from "formik";
 import * as Yup from "yup";
 
 import client from "../api/client";
+
+import { StackActions } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const validationSchema = Yup.object({
   FirstName: Yup.string()
@@ -34,6 +37,8 @@ const validationSchema = Yup.object({
 });
 
 export default function SignUpForm() {
+  const navigation = useNavigation();
+
   const userInfo = {
     FirstName: "",
     MiddleName: "",
@@ -91,14 +96,34 @@ export default function SignUpForm() {
 
   const signUp = async (values, formikActions) => {
     console.log(values);
+
+    //=====
     try {
       const res = await client.post("/create-user", { ...values });
       console.log(res.data);
-      formikActions.resetForm();
-      formikActions.setSubmitting(false);
+
+      if (res.data.success) {
+        const logInRes = await client.post("/sign-in", {
+          Email: values.Email,
+          Password: values.Password,
+        });
+
+        // console.log(logInRes);
+        // console.log(navigation);
+        if (logInRes.data.success) {
+          navigation.dispatch(
+            StackActions.replace("ImageUploadScreen", {
+              token: logInRes.data.token,
+            })
+          );
+          formikActions.resetForm();
+          formikActions.setSubmitting(false);
+        }
+      }
     } catch (error) {
       console.log(error);
     }
+    //   //===
   };
 
   return (
