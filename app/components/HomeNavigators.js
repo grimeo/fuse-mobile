@@ -25,7 +25,12 @@ export default function HomeNavigators() {
         marginBottom: 5,
       }}
     >
-      <TouchableOpacity style={styles.navBtnContainer}>
+      <TouchableOpacity
+        style={styles.navBtnContainer}
+        onPress={() => {
+          navigation.dispatch(StackActions.replace("HomeScreen"));
+        }}
+      >
         <View style={{ width: 33, height: 33 }}>
           <Image
             style={{ width: "100%", height: "100%" }}
@@ -33,7 +38,12 @@ export default function HomeNavigators() {
           />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navBtnContainer}>
+      <TouchableOpacity
+        style={styles.navBtnContainer}
+        onPress={() => {
+          navigation.dispatch(StackActions.replace("ChatScreen"));
+        }}
+      >
         <View style={{ width: 33, height: 33 }}>
           <Image
             style={{ width: "100%", height: "100%" }}
@@ -49,7 +59,12 @@ export default function HomeNavigators() {
           />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navBtnContainer}>
+      <TouchableOpacity
+        style={styles.navBtnContainer}
+        onPress={() => {
+          navigation.dispatch(StackActions.replace("TransactionScreen"));
+        }}
+      >
         <View style={{ width: 33, height: 33 }}>
           <Image
             style={{ width: "100%", height: "100%" }}
