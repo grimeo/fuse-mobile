@@ -12,7 +12,7 @@ export default function PromptTypeOfUserScreen() {
       <Text>PromptTypeOfUserScreen</Text>
       <Text
         onPress={() => {
-          navigation.dispatch(StackActions.replace("HomeScreen"));
+          navigation.dispatch(StackActions.replace("ImageUploadScreen"));
         }}
       >
         Skip

@@ -1,12 +1,4 @@
 import React from "react";
-import { useEffect, useRef } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  Animated,
-  View,
-  Dimensions,
-} from "react-native";
 
 import AppFormScreen from "./app/screens/AppFormScreen";
 import ImageUploadScreen from "./app/screens/ImageUploadScreen";
@@ -21,7 +13,9 @@ const Stack = createStackNavigator();
 
 const StackNavigator = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false, animationEnabled: false }}
+    >
       <Stack.Screen component={AppFormScreen} name="AppFormScreen" />
       <Stack.Screen component={ImageUploadScreen} name="ImageUploadScreen" />
       <Stack.Screen component={ProfileScreen} name="ProfileScreen" />
