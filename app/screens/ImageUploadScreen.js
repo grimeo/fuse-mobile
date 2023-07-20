@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 function ImageUpload(props) {
   const navigation = useNavigation();
 
-  const { token } = props.route.params;
+  // const { token } = props.route.params;
 
   const [Avatar, setAvatar] = useState("");
 
@@ -50,7 +50,7 @@ function ImageUpload(props) {
         },
       });
       console.log(res.data);
-      console.log(token);
+      // console.log(token);
       if (res.data.success) {
         navigation.dispatch(StackActions.replace("UserProfile"));
       }
@@ -79,7 +79,7 @@ function ImageUpload(props) {
         ) : null}
         <Text
           onPress={() => {
-            navigation.dispatch(StackActions.replace("PromptTypeOfUserScreen"));
+            navigation.dispatch(StackActions.replace("HomeScreen"));
           }}
           style={styles.skipBtn}
         >
