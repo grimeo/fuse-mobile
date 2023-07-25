@@ -6,7 +6,7 @@ import { View, Text, Dimensions, Image } from "react-native";
 const width = Dimensions.get("window").width;
 const chatIcon = "../assets/icons/chat.png";
 
-export default function Service() {
+export default function Service({ navigation }) {
   return (
     <View style={{ width: width, marginTop: 5, borderWidth: 1 }}>
       <View
@@ -95,6 +95,9 @@ export default function Service() {
               borderRadius: 5,
               padding: 1,
               opacity: 0.7,
+            }}
+            onPress={() => {
+              navigation.navigate("PrivateChatScreen");
             }}
           >
             <Image

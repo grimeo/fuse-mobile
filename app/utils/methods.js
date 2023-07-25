@@ -6,7 +6,7 @@ export const updateError = (errorMessage, stateUpdater) => {
   stateUpdater(errorMessage);
   setTimeout(() => {
     stateUpdater("");
-  }, 2500);
+  }, 8000);
 };
 
 export const isValidEmail = (email) => {

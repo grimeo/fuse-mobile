@@ -14,11 +14,17 @@ const chatIcon = "../assets/icons/chat.png";
 const transactionIcon = "../assets/icons/transaction.png";
 const settingsIcon = "../assets/icons/settings.png";
 
-export default function HomeNavigators() {
+export default function HomeNavigators({
+  navigation,
+  isOnHomeTab,
+  isOnChatTab,
+  isOnTransactionTab,
+  isOnSettingsTab,
+}) {
   return (
     <View
       style={{
-        // width: width * 0.9,
+        width: width * 0.9,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
@@ -26,33 +32,57 @@ export default function HomeNavigators() {
       }}
     >
       <TouchableOpacity
-        style={styles.navBtnContainer}
+        delayedPressIn={0}
+        style={[
+          styles.navBtnContainer,
+          isOnHomeTab ? { backgroundColor: "#6663" } : null,
+        ]}
         onPress={() => {
-          navigation.dispatch(StackActions.replace("HomeScreen"));
+          if (isOnHomeTab) {
+            // refresh yung components sa baba
+          } else navigation.navigate("HomeScreen");
         }}
       >
-        <View style={{ width: 33, height: 33 }}>
+        <View style={{ width: 28, height: 28 }}>
           <Image
             style={{ width: "100%", height: "100%" }}
             source={require(homeIcon)}
           />
         </View>
       </TouchableOpacity>
+
       <TouchableOpacity
-        style={styles.navBtnContainer}
+        delayedPressIn={0}
+        style={[
+          styles.navBtnContainer,
+          isOnChatTab ? { backgroundColor: "#6663" } : null,
+        ]}
         onPress={() => {
-          navigation.dispatch(StackActions.replace("ChatScreen"));
+          if (isOnChatTab) {
+            // refresh yung components sa baba
+          } else navigation.navigate("ChatScreen");
         }}
       >
-        <View style={{ width: 33, height: 33 }}>
+        <View style={{ width: 28, height: 28 }}>
           <Image
             style={{ width: "100%", height: "100%" }}
             source={require(chatIcon)}
           />
         </View>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.navBtnContainer}>
-        <View style={{ width: 33, height: 33 }}>
+      <TouchableOpacity
+        delayedPressIn={0}
+        style={[
+          styles.navBtnContainer,
+          isOnTransactionTab ? { backgroundColor: "#6663" } : null,
+        ]}
+        onPress={() => {
+          if (isOnTransactionTab) {
+            // refresh yung components sa baba
+          } else navigation.navigate("PrivateChatScreen");
+        }}
+      >
+        <View style={{ width: 28, height: 28 }}>
           <Image
             style={{ width: "100%", height: "100%" }}
             source={require(transactionIcon)}
@@ -60,12 +90,18 @@ export default function HomeNavigators() {
         </View>
       </TouchableOpacity>
       <TouchableOpacity
-        style={styles.navBtnContainer}
+        delayedPressIn={0}
+        style={[
+          styles.navBtnContainer,
+          isOnSettingsTab ? { backgroundColor: "#6663" } : null,
+        ]}
         onPress={() => {
-          navigation.dispatch(StackActions.replace("TransactionScreen"));
+          if (isOnSettingsTab) {
+            // refresh yung components sa baba
+          } else navigation.navigate("SettingsScreen");
         }}
       >
-        <View style={{ width: 33, height: 33 }}>
+        <View style={{ width: 28, height: 28 }}>
           <Image
             style={{ width: "100%", height: "100%" }}
             source={require(settingsIcon)}
@@ -82,6 +118,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 1,
+    padding: 3,
     // borderWidth: 2,
     borderRadius: 7,
   },

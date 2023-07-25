@@ -15,7 +15,7 @@ import LoginFormScreen from "../screens/LoginFormScreen";
 
 const { width } = Dimensions.get("window");
 
-export default function AppForm({ navigaton }) {
+export default function AppForm({ navigation }) {
   const animation = useRef(new Animated.Value(0)).current;
   const scrollview = useRef();
 
@@ -89,10 +89,10 @@ export default function AppForm({ navigaton }) {
         )}
       >
         <ScrollView>
-          <LoginFormScreen navigation={navigaton} />
+          <LoginFormScreen navigation={navigation} />
         </ScrollView>
         <ScrollView>
-          <SignUpFormScreen navigation={navigaton} />
+          <SignUpFormScreen navigation={navigation} />
         </ScrollView>
       </ScrollView>
     </View>

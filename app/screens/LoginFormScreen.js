@@ -13,7 +13,6 @@ import * as Yup from "yup";
 import client from "../api/client";
 
 import { StackActions } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
 
 const validationSchema = Yup.object({
   Email: Yup.string().email("Invalid Email.").required("Email is required."),
@@ -23,11 +22,8 @@ const validationSchema = Yup.object({
     .min(8, "Must be more than 7 characters"),
 });
 
-export default function loginForm() {
-  const navigation = useNavigation();
-
+export default function loginForm({ navigation }) {
   // const [userInfo, setUserInfo] = useState({ Email: "", Password: "" });
-
   const userInfo = {
     Email: "",
     Password: "",
@@ -61,19 +57,18 @@ export default function loginForm() {
   // };
 
   const logIn = async (values, formikActions) => {
-    navigation.dispatch(StackActions.replace("HomeScreen"));
-    // console.log(values);
-    // try {
-    //   const res = await client.post("/sign-in", { ...values });
-    //   console.log(res.data);
-    //   const { success } = res.data;
-    //   if (!success) return updateError(res.data.message, setError);
-    formikActions.resetForm();
-    formikActions.setSubmitting(false);
-    //
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+    console.log(values);
+    try {
+      const res = await client.post("/sign-in", { ...values });
+      console.log(res.data);
+      const { success } = res.data;
+      if (!success) return updateError(res.data.message, setError);
+      formikActions.resetForm();
+      formikActions.setSubmitting(false);
+      navigation.dispatch(StackActions.replace("HomeScreen"));
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
