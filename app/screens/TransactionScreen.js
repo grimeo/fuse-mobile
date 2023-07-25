@@ -1,5 +1,7 @@
 import React from "react";
+
 import { View, Text, StyleSheet, Platform, StatusBar } from "react-native";
+
 import HomeNavigators from "../components/HomeNavigators";
 import TransactionPreview from "../components/TransactionPreview";
 
