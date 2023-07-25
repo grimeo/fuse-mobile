@@ -28,7 +28,7 @@ export default function HomeNavigators({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: 5,
+        marginVertical: 5,
       }}
     >
       <TouchableOpacity
@@ -79,7 +79,7 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnTransactionTab) {
             // refresh yung components sa baba
-          } else navigation.navigate("PrivateChatScreen");
+          } else navigation.navigate("TransactionScreen");
         }}
       >
         <View style={{ width: 28, height: 28 }}>

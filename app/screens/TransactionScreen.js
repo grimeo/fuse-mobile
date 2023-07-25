@@ -1,10 +1,26 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { View, Text, StyleSheet, Platform, StatusBar } from "react-native";
+import HomeNavigators from "../components/HomeNavigators";
+import TransactionPreview from "../components/TransactionPreview";
 
-export default function TransactionScreen() {
+export default function TransactionScreen({ navigation }) {
   return (
-    <View>
-      <Text>TransactionScreen</Text>
+    <View style={styles.container}>
+      <HomeNavigators isOnTransactionTab={true} navigation={navigation} />
+      <View style={{ flex: 1 }}>
+        <TransactionPreview />
+        <TransactionPreview />
+        <TransactionPreview />
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
+});

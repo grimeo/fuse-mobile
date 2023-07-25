@@ -58,17 +58,17 @@ export default function loginForm({ navigation }) {
 
   const logIn = async (values, formikActions) => {
     console.log(values);
-    try {
-      const res = await client.post("/sign-in", { ...values });
-      console.log(res.data);
-      const { success } = res.data;
-      if (!success) return updateError(res.data.message, setError);
-      formikActions.resetForm();
-      formikActions.setSubmitting(false);
-      navigation.dispatch(StackActions.replace("HomeScreen"));
-    } catch (error) {
-      console.log(error.message);
-    }
+    // try {
+    //   const res = await client.post("/sign-in", { ...values });
+    //   console.log(res.data);
+    //   const { success } = res.data;
+    //   if (!success) return updateError(res.data.message, setError);
+    //   formikActions.resetForm();
+    //   formikActions.setSubmitting(false);
+    navigation.dispatch(StackActions.replace("HomeScreen"));
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
   };
 
   return (
