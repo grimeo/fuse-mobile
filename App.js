@@ -17,6 +17,7 @@ import PrivateChatScreen from "./app/screens/PrivateChatScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import TransactionScreen from "./app/screens/TransactionScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,6 +40,7 @@ export default function App() {
         <Stack.Screen name="ImageUploadScreen" component={ImageUploadScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="TransactionScreen" component={TransactionScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />
         <Stack.Screen name="PrivateChatScreen" component={PrivateChatScreen} />
       </Stack.Navigator>
