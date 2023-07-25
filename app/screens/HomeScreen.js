@@ -1,12 +1,18 @@
 import React from "react";
-import { View, Text, Platform, StatusBar } from "react-native";
+import {
+  View,
+  Text,
+  Platform,
+  StatusBar,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
 import HomeNavigators from "../components/HomeNavigators";
-import HomeHead from "../components/HomeHead";
 import Service from "../components/Service";
 import ServicesContainer from "../components/ServicesContainer";
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   return (
     <View
       style={{
@@ -16,19 +22,15 @@ export default function HomeScreen() {
         paddingTop: (Platform.OS = "ios" ? StatusBar.currentHeight : 0),
       }}
     >
-      <HomeHead />
-      <HomeNavigators />
+      <HomeNavigators navigation={navigation} isOnHomeTab={true} />
+
       <View style={{ flex: 1 }}>
-        {
-          // onPress={() => {
-          //   navigation.dispatch(StackActions.replace("HomeScreen"));
-          // }
-        }
-        <ServicesContainer>
-          <Service />
-          <Service />
-          <Service />
-          <Service />
+        <ServicesContainer navigation={navigation}>
+          <Service navigation={navigation} />
+          <Service navigation={navigation} />
+          <Service navigation={navigation} />
+          <Service navigation={navigation} />
+          <Service navigation={navigation} />
         </ServicesContainer>
       </View>
     </View>

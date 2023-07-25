@@ -14,7 +14,6 @@ import * as Yup from "yup";
 import client from "../api/client";
 
 import { StackActions } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
 
 const validationSchema = Yup.object({
   FirstName: Yup.string()
@@ -36,9 +35,7 @@ const validationSchema = Yup.object({
     .equals([Yup.ref("Password"), null], "Password do not match."),
 });
 
-export default function SignUpForm() {
-  const navigation = useNavigation();
-
+export default function SignUpForm({ navigation }) {
   const userInfo = {
     FirstName: "",
     MiddleName: "",
@@ -97,32 +94,30 @@ export default function SignUpForm() {
   const signUp = async (values, formikActions) => {
     console.log(values);
 
-    //=====
-    // try {
-    //   const res = await client.post("/create-user", { ...values });
-    //   console.log(res.data);
+    try {
+      const res = await client.post("/create-user", { ...values });
+      console.log(res.data);
 
-    //   if (res.data.success) {
-    //     const logInRes = await client.post("/sign-in", {
-    //       Email: values.Email,
-    //       Password: values.Password,
-    //     });
+      if (res.data.success) {
+        const logInRes = await client.post("/sign-in", {
+          Email: values.Email,
+          Password: values.Password,
+        });
 
-    //     // console.log(logInRes);
-    //     // console.log(navigation);
-    //     if (logInRes.data.success) {
-    navigation.dispatch(StackActions.replace("PromptTypeOfUserScreen"));
-    // , {token: logInRes.data.token,
-    //         })
-    //       );
-    //       formikActions.resetForm();
-    //       formikActions.setSubmitting(false);
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    //   //===
+        // console.log(logInRes);
+        if (logInRes.data.success) {
+          navigation.dispatch(
+            StackActions.replace("PromptTypeOfUserScreen", {
+              token: logInRes.data.token,
+            })
+          );
+          formikActions.resetForm();
+          formikActions.setSubmitting(false);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
