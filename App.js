@@ -1,12 +1,3 @@
-import {
-  View,
-  TouchableOpacity,
-  TextInput,
-  Text,
-  ScrollView,
-  Image,
-} from "react-native";
-
 import AppFormScreen from "./app/screens/AppFormScreen";
 import ImageUploadScreen from "./app/screens/ImageUploadScreen";
 import ProfileScreen from "./app/screens/ProfileScreen";
