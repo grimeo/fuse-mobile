@@ -10,6 +10,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import TransactionScreen from "./app/screens/TransactionScreen";
 import SettingsScreen from "./app/screens/SettingsScreen";
+import PostTemplateModal from "./app/screens/PostTemplateModal";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,7 @@ export default function App() {
         <Stack.Screen name="ImageUploadScreen" component={ImageUploadScreen} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="PostTemplateModal" component={PostTemplateModal} />
         <Stack.Screen name="TransactionScreen" component={TransactionScreen} />
         <Stack.Screen name="SettingsScreen" component={SettingsScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} />

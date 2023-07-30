@@ -11,6 +11,7 @@ import {
 import HomeNavigators from "../components/HomeNavigators";
 import Service from "../components/Service";
 import ServicesContainer from "../components/ServicesContainer";
+import AddNewPostBtn from "../components/AddNewPostBtn";
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -26,6 +27,7 @@ export default function HomeScreen({ navigation }) {
 
       <View style={{ flex: 1 }}>
         <ServicesContainer navigation={navigation}>
+          <AddNewPostBtn navigation={navigation} />
           <Service navigation={navigation} />
           <Service navigation={navigation} />
           <Service navigation={navigation} />
