@@ -60,7 +60,7 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnChatTab) {
             // refresh yung components sa baba
-          } else navigation.navigate("ChatScreen");
+          } else navigation.replace("ChatScreen");
         }}
       >
         <View style={{ width: 28, height: 28 }}>
@@ -79,7 +79,7 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnTransactionTab) {
             // refresh yung components sa baba
-          } else navigation.navigate("TransactionScreen");
+          } else navigation.replace("TransactionScreen");
         }}
       >
         <View style={{ width: 28, height: 28 }}>
@@ -98,7 +98,7 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnSettingsTab) {
             // refresh yung components sa baba
-          } else navigation.navigate("SettingsScreen");
+          } else navigation.replace("SettingsScreen");
         }}
       >
         <View style={{ width: 28, height: 28 }}>

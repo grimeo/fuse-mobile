@@ -6,7 +6,7 @@ import { Feather } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
 
-export default function VerifyBtn() {
+export default function VerifyBtn({ navigation }) {
   return (
     <TouchableOpacity
       style={{

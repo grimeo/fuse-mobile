@@ -21,9 +21,9 @@ export default function SettingsScreen({ navigation }) {
       <HomeNavigators isOnSettingsTab={true} navigation={navigation} />
       <View style={{ flex: 1, paddingTop: 10 }}>
         <ProfileBtn navigation={navigation} />
-        <VerifyBtn />
+        <VerifyBtn navigation={navigation} />
       </View>
-      <LogoutBtn />
+      <LogoutBtn navigation={navigation} />
     </View>
   );
 }
