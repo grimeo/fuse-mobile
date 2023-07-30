@@ -20,7 +20,7 @@ export default function SettingsScreen({ navigation }) {
     <View style={styles.container}>
       <HomeNavigators isOnSettingsTab={true} navigation={navigation} />
       <View style={{ flex: 1, paddingTop: 10 }}>
-        <ProfileBtn />
+        <ProfileBtn navigation={navigation} />
         <VerifyBtn />
       </View>
       <LogoutBtn />

@@ -12,25 +12,30 @@ import {
   ScrollView,
 } from "react-native";
 
+import Service from "../components/Service";
+
 const arrowBackIcon = "../assets/icons/arrow_back.png";
 const ScreenWidth = Dimensions.get("window").width;
 
-export default function ProfileScreen() {
+export default function ProfileScreen({ navigation }) {
   const [isServiceProvider, setIsServiceProvider] = useState(true);
+  const [isVerified, setIsVerified] = useState(true);
   return (
     <View style={styles.container}>
       {/* back btn */}
       <View style={{ width: "90%" }}>
         <TouchableOpacity
           style={{
-            width: 33,
-            height: 33,
+            width: 44,
+            height: 44,
             justifyContent: "center",
             alignItems: "center",
+            padding: 4,
           }}
+          onPress={() => navigation.goBack()}
         >
           <Image
-            style={{ width: "60%", height: "60%", opacity: 0.7 }}
+            style={{ width: "80%", height: "80%", opacity: 0.7 }}
             source={require(arrowBackIcon)}
           />
         </TouchableOpacity>
@@ -40,8 +45,8 @@ export default function ProfileScreen() {
         {/* user profile header */}
         <View
           style={{
-            borderWidth: 1,
-            width: ScreenWidth * 0.9,
+            // borderWidth: 1,
+            width: ScreenWidth,
             justifyContent: "center",
             alignItems: "center",
             padding: 30,
@@ -70,6 +75,7 @@ export default function ProfileScreen() {
             Juan Dela Frooze
           </Text>
           {isServiceProvider ? <Text>Service Provider </Text> : null}
+          {isVerified ? <Text>Verified </Text> : null}
         </View>
 
         {/* rating */}
@@ -77,7 +83,7 @@ export default function ProfileScreen() {
           <View
             style={{
               borderWidth: 1,
-              width: ScreenWidth * 0.9,
+              width: ScreenWidth,
               justifyContent: "center",
               alignItems: "center",
               paddingTop: 20,
@@ -109,34 +115,20 @@ export default function ProfileScreen() {
         {/* container */}
         <View
           style={{
-            borderWidth: 1,
-            width: ScreenWidth * 0.9,
+            // borderWidth: 1,
+            width: ScreenWidth,
             padding: 20,
             justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <Text style={{ fontSize: 18, paddingBottom: 10 }}>Services</Text>
+          <Text style={{ fontSize: 18, fontWeight: "bold", paddingBottom: 10 }}>
+            Services
+          </Text>
           {/* services */}
-          <View
-            style={{
-              borderWidth: 1,
-              width: "100%",
-              height: 200,
-              marginBottom: 10,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          ></View>
-          <View
-            style={{
-              borderWidth: 1,
-              width: "100%",
-              height: 200,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          ></View>
+          <Service navigation={navigation} />
+          <Service navigation={navigation} />
+          <Service navigation={navigation} />
         </View>
       </ScrollView>
     </View>

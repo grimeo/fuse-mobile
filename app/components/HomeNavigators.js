@@ -28,7 +28,7 @@ export default function HomeNavigators({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        marginVertical: 5,
+        // marginVertical: 5,
       }}
     >
       <TouchableOpacity

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,9 +11,18 @@ import {
 import { Feather } from "@expo/vector-icons";
 
 import { StatusBarPadding } from "../utils/Constants";
+import SentMessage from "../components/SentMessage";
 const arrowBackIcon = "../assets/icons/arrow_back.png";
 
 export default function PrivateChatScreen({ navigation }) {
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+
+  const messageTemplate = {
+    message: "",
+    time: "",
+  };
+
   return (
     <View style={styles.container}>
       <View
@@ -27,8 +36,8 @@ export default function PrivateChatScreen({ navigation }) {
       >
         <TouchableOpacity
           style={{
-            width: 33,
-            height: 33,
+            width: 44,
+            height: 44,
             marginLeft: 5,
             justifyContent: "center",
             alignItems: "center",
@@ -46,10 +55,11 @@ export default function PrivateChatScreen({ navigation }) {
           Juan Dela Frooze
         </Text>
       </View>
-      <ScrollView
-        style={{ flex: 1 }}
-        keyboardDismissMode="interactive"
-      ></ScrollView>
+      <ScrollView style={{ flex: 1 }} keyboardDismissMode="interactive">
+        {messages.map((item, index) => {
+          return <SentMessage key={index} message={item} />;
+        })}
+      </ScrollView>
       <View
         style={{
           flexDirection: "row",
@@ -57,7 +67,7 @@ export default function PrivateChatScreen({ navigation }) {
           alignItems: "center",
           paddingHorizontal: 5,
           paddingVertical: 5,
-          borderWidth: 1,
+          borderTopWidth: 1,
         }}
       >
         <TextInput
@@ -75,6 +85,10 @@ export default function PrivateChatScreen({ navigation }) {
             backgroundColor: "#6662",
           }}
           placeholder="Message..."
+          onChangeText={(text) => {
+            setMessage(text);
+          }}
+          value={message}
         />
         <TouchableOpacity
           style={{
@@ -86,6 +100,15 @@ export default function PrivateChatScreen({ navigation }) {
           }}
           onPress={() => {
             //send
+            setMessage(message);
+            if (!message == null || !message == "") {
+              setMessages([
+                ...messages,
+                message.replace("/^s+|s+$/g", "").trim(),
+              ]);
+            }
+            setMessage("");
+            console.log(messages);
           }}
         >
           <Feather name="send" size={30} color="black" />

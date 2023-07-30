@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 
 const width = Dimensions.get("window").width;
 
-export default function ProfileBtn() {
+export default function ProfileBtn({ navigation }) {
   return (
     <TouchableOpacity
       style={{
@@ -16,6 +16,9 @@ export default function ProfileBtn() {
         justifyContent: "flex-start",
         paddingLeft: 20,
         paddingVertical: 5,
+      }}
+      onPress={() => {
+        navigation.navigate("ProfileScreen");
       }}
     >
       <View style={{ width: 45, height: 45 }}>
