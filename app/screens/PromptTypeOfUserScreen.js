@@ -46,14 +46,6 @@ export default function PromptTypeOfUserScreen() {
           Customer
         </Text>
       </TouchableOpacity>
-      <Text
-        style={{ fontSize: 18, padding: 5, opacity: 0.4, fontWeight: "bold" }}
-        onPress={() => {
-          navigation.dispatch(StackActions.replace("ImageUploadScreen"));
-        }}
-      >
-        Skip
-      </Text>
     </View>
   );
 }

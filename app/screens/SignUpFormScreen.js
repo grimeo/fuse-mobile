@@ -94,30 +94,28 @@ export default function SignUpForm({ navigation }) {
   const signUp = async (values, formikActions) => {
     console.log(values);
 
-    // try {
-    //   const res = await client.post("/create-user", { ...values });
-    //   console.log(res.data);
+    try {
+      const res = await client.post("/create-user", { ...values });
+      console.log(res.data);
 
-    //   if (res.data.success) {
-    //     const logInRes = await client.post("/sign-in", {
-    //       Email: values.Email,
-    //       Password: values.Password,
-    //     });
+      if (res.data.success) {
+        const logInRes = await client.post("/sign-in", {
+          Email: values.Email,
+          Password: values.Password,
+        });
 
-    //     // console.log(logInRes);
-    //     if (logInRes.data.success) {
-    navigation.dispatch(StackActions.replace("PromptTypeOfUserScreen"));
-    //         , {
-    //           token: logInRes.data.token,
-    //         })
-    //       );
-    //       formikActions.resetForm();
-    //       formikActions.setSubmitting(false);
-    //     }
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+        // console.log(logInRes);
+        if (logInRes.data.success) {
+          navigation.dispatch(StackActions.replace("PromptTypeOfUserScreen"), {
+            token: logInRes.data.token,
+          });
+          formikActions.resetForm();
+          formikActions.setSubmitting(false);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
