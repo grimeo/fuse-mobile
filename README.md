@@ -18,6 +18,6 @@ Public Trello: https://trello.com/b/y6mLBfDu/sprint
 
 Trello invitation link: https://trello.com/invite/sendhelpapp/ATTIc683ba02176cd5c87fbd2a7b3bc09ec46997B61B
 
-Expo: https://expo.dev/accounts/grimeo/projects/fuseFetcher/builds/7576e090-91a8-4031-844f-ac3a8277a036
+Expo: https://expo.dev/accounts/grimeo/projects/fuseFetcher/builds/f09628bb-96c6-4333-8d5f-799463ab757e
 
-APK file link: https://expo.dev/artifacts/eas/fvhPDCkgvqAkxz9x8FaHX5.apk
+APK file link: https://expo.dev/artifacts/eas/vH6UTZb14B3tup6vG3NdmW.apk
