@@ -2,3 +2,7 @@ Dist
 
 apk file name: Fuse.apk
 v1.0
+
+Note for using the app:
+- Api request takes 3-10 seconds to respond
+- 
