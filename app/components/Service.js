@@ -6,7 +6,8 @@ import { View, Text, Dimensions, Image } from "react-native";
 const width = Dimensions.get("window").width;
 const chatIcon = "../assets/icons/chat.png";
 
-export default function Service({ navigation }) {
+export default function Service({ navigation, userData }) {
+  // console.log(userData);
   return (
     <View style={{ width: width, marginTop: 5, borderWidth: 1 }}>
       <View
@@ -29,13 +30,17 @@ export default function Service({ navigation }) {
               height: "100%",
             }}
             source={{
-              uri: "https://res.cloudinary.com/dz7vdp3g0/image/upload/v1689839224/64b8d298c6015d7c2a00de8c_profile.jpg",
+              uri: userData.Avatar,
             }}
           />
         </View>
         <View style={{ padding: 10 }}>
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-            Juan Dela Frooze
+            {userData.FirstName +
+              " " +
+              userData.MiddleName +
+              " " +
+              userData.LastName}
           </Text>
           <Text style={{ fontSize: 12 }}>September 11, 2002</Text>
         </View>

@@ -25,6 +25,7 @@ export default function HomeNavigators(props) {
     isOnSettingsTab,
     userData,
   } = props;
+  // console.log(userData);
   return (
     <View
       style={{
@@ -44,7 +45,8 @@ export default function HomeNavigators(props) {
         onPress={() => {
           if (isOnHomeTab) {
             // refresh yung components sa baba
-          } else navigation.dispatch(StackActions.replace("HomeScreen"));
+          } else
+            navigation.dispatch(StackActions.replace("HomeScreen", userData));
         }}
       >
         <View style={{ width: 28, height: 28 }}>
@@ -64,7 +66,8 @@ export default function HomeNavigators(props) {
         onPress={() => {
           if (isOnChatTab) {
             // refresh yung components sa baba
-          } else navigation.dispatch(StackActions.replace("ChatScreen"));
+          } else
+            navigation.dispatch(StackActions.replace("ChatScreen", userData));
         }}
       >
         <View style={{ width: 28, height: 28 }}>
@@ -83,7 +86,10 @@ export default function HomeNavigators(props) {
         onPress={() => {
           if (isOnTransactionTab) {
             // refresh yung components sa baba
-          } else navigation.dispatch(StackActions.replace("TransactionScreen"));
+          } else
+            navigation.dispatch(
+              StackActions.replace("TransactionScreen", userData)
+            );
         }}
       >
         <View style={{ width: 28, height: 28 }}>

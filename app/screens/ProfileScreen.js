@@ -133,9 +133,9 @@ export default function ProfileScreen(props) {
             Services
           </Text>
           {/* services */}
-          <Service navigation={navigation} />
-          <Service navigation={navigation} />
-          <Service navigation={navigation} />
+          <Service userData={userInfo} navigation={navigation} />
+          <Service userData={userInfo} navigation={navigation} />
+          <Service userData={userInfo} navigation={navigation} />
         </View>
       </ScrollView>
     </View>

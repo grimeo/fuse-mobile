@@ -34,11 +34,10 @@ export default function HomeScreen(props) {
       <View style={{ flex: 1 }}>
         <ServicesContainer navigation={navigation}>
           <AddNewPostBtn navigation={navigation} />
-          <Service navigation={navigation} />
-          <Service navigation={navigation} />
-          <Service navigation={navigation} />
-          <Service navigation={navigation} />
-          <Service navigation={navigation} />
+          <Service userData={userData} navigation={navigation} />
+          <Service userData={userData} navigation={navigation} />
+          <Service userData={userData} navigation={navigation} />
+          <Service userData={userData} navigation={navigation} />
         </ServicesContainer>
       </View>
     </View>

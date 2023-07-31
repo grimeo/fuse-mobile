@@ -5,10 +5,16 @@ import { View, Text, StyleSheet, Platform, StatusBar } from "react-native";
 import HomeNavigators from "../components/HomeNavigators";
 import TransactionPreview from "../components/TransactionPreview";
 
-export default function TransactionScreen({ navigation }) {
+export default function TransactionScreen(props) {
+  const { navigation } = props;
+  const userData = props.route.params;
   return (
     <View style={styles.container}>
-      <HomeNavigators isOnTransactionTab={true} navigation={navigation} />
+      <HomeNavigators
+        userData={userData}
+        isOnTransactionTab={true}
+        navigation={navigation}
+      />
       <View style={{ flex: 1 }}>
         <TransactionPreview />
         <TransactionPreview />

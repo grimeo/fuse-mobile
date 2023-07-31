@@ -7,6 +7,8 @@ import ChatList from "../components/ChatList";
 
 export default function ChatScreen(props) {
   const { navigation, text } = props;
+  const userData = props.route.params;
+  // console.log(userData);
   return (
     <View
       style={{
@@ -16,7 +18,11 @@ export default function ChatScreen(props) {
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
       }}
     >
-      <HomeNavigators navigation={navigation} isOnChatTab={true} />
+      <HomeNavigators
+        userData={userData}
+        navigation={navigation}
+        isOnChatTab={true}
+      />
       <View style={{ flex: 1 }}>
         <ChatList text={text} navigation={navigation} />
       </View>

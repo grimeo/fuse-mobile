@@ -18,14 +18,18 @@ import LogoutBtn from "../components/LogoutBtn";
 import VerifyBtn from "../components/VerifyBtn";
 
 export default function SettingsScreen(props) {
-  console.log(props);
+  // console.log(props);
   const { navigation } = props;
-  const { user } = props.route.params;
+  const userData = props.route.params;
   return (
     <View style={styles.container}>
-      <HomeNavigators isOnSettingsTab={true} navigation={navigation} />
+      <HomeNavigators
+        isOnSettingsTab={true}
+        userData={userData}
+        navigation={navigation}
+      />
       <View style={{ flex: 1, paddingTop: 10 }}>
-        <ProfileBtn userData={user} navigation={navigation} />
+        <ProfileBtn userData={userData} navigation={navigation} />
         <VerifyBtn navigation={navigation} />
       </View>
       <LogoutBtn navigation={navigation} />

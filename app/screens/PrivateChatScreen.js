@@ -108,7 +108,7 @@ export default function PrivateChatScreen({ navigation }) {
               ]);
             }
             setMessage("");
-            console.log(messages);
+            // console.log(messages);
           }}
         >
           <Feather name="send" size={30} color="black" />
