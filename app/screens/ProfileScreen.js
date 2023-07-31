@@ -20,7 +20,7 @@ const ScreenWidth = Dimensions.get("window").width;
 export default function ProfileScreen(props) {
   const { navigation } = props;
   const userInfo = props.route.params;
-  console.log(userInfo);
+  // console.log(userInfo);
   const [isServiceProvider, setIsServiceProvider] = useState(true);
   const [isVerified, setIsVerified] = useState(true);
   return (

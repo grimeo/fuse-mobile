@@ -47,7 +47,7 @@ function ImageUpload(props) {
           authorization: "JWT " + token,
         },
       });
-      console.log(res.data);
+      // console.log(res.data);
       // console.log(token);
       if (res.data.success) {
         navigation.dispatch(StackActions.replace("HomeScreen", res.data));

@@ -19,7 +19,7 @@ export default function ProfileBtn({ navigation, userData }) {
       }}
       onPress={() => {
         navigation.navigate("ProfileScreen", userData);
-        console.log(userData);
+        // console.log(userData);
       }}
     >
       <View style={{ width: 45, height: 45 }}>
