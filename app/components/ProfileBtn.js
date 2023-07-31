@@ -30,7 +30,7 @@ export default function ProfileBtn({ navigation, userData }) {
             borderRadius: 45 / 2,
           }}
           source={{
-            uri: "https://res.cloudinary.com/dz7vdp3g0/image/upload/v1689839224/64b8d298c6015d7c2a00de8c_profile.jpg",
+            uri: userData.Avatar,
           }}
         />
       </View>

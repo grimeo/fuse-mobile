@@ -9,7 +9,7 @@ export default function LogoutBtn({ navigation }) {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.dispatch(StackActions.replace("AppFormScreen"));
+        navigation.dispatch(StackActions.replace("AppFormScreen", {}));
       }}
     >
       <Text
