@@ -17,7 +17,10 @@ import Service from "../components/Service";
 const arrowBackIcon = "../assets/icons/arrow_back.png";
 const ScreenWidth = Dimensions.get("window").width;
 
-export default function ProfileScreen({ navigation }) {
+export default function ProfileScreen(props) {
+  const { navigation } = props;
+  const userInfo = props.route.params;
+  console.log(userInfo);
   const [isServiceProvider, setIsServiceProvider] = useState(true);
   const [isVerified, setIsVerified] = useState(true);
   return (
@@ -66,13 +69,17 @@ export default function ProfileScreen({ navigation }) {
           >
             <Image
               source={{
-                uri: "https://res.cloudinary.com/dz7vdp3g0/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1689636918/64b5cf4411d9ec637c113664_profile.jpg",
+                uri: userInfo.Avatar,
               }}
               style={{ width: "100%", height: "100%" }}
             />
           </View>
           <Text style={{ paddingTop: 20, fontSize: 20, fontWeight: "bold" }}>
-            Juan Dela Frooze
+            {userInfo.FirstName +
+              " " +
+              userInfo.MiddleName +
+              " " +
+              userInfo.LastName}
           </Text>
           {isServiceProvider ? <Text>Service Provider </Text> : null}
           {isVerified ? <Text>Verified </Text> : null}

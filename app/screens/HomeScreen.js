@@ -13,7 +13,9 @@ import Service from "../components/Service";
 import ServicesContainer from "../components/ServicesContainer";
 import AddNewPostBtn from "../components/AddNewPostBtn";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen(props) {
+  const { navigation } = props;
+  const userData = props.route.params;
   return (
     <View
       style={{
@@ -23,7 +25,11 @@ export default function HomeScreen({ navigation }) {
         paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
       }}
     >
-      <HomeNavigators navigation={navigation} isOnHomeTab={true} />
+      <HomeNavigators
+        navigation={navigation}
+        userData={userData}
+        isOnHomeTab={true}
+      />
 
       <View style={{ flex: 1 }}>
         <ServicesContainer navigation={navigation}>

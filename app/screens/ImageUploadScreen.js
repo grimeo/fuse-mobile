@@ -5,12 +5,11 @@ import * as ImagePicker from "expo-image-picker";
 import client from "../api/client";
 
 import { StackActions } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
 
 function ImageUpload(props) {
-  const navigation = useNavigation();
+  const { navigation } = props;
 
-  // const { token } = props.route.params;
+  const { token } = props.route.params;
 
   const [Avatar, setAvatar] = useState("");
 
@@ -46,13 +45,12 @@ function ImageUpload(props) {
           Accept: "application/json",
           "Content-Type": "multipart/form-data",
           authorization: "JWT " + token,
-          // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGI0NDExNWNiMmY0ZThjNWUwMjllODMiLCJpYXQiOjE2ODk2MzYwMzQsImV4cCI6MTY4OTcyMjQzNH0.JY-wIC-m2ascHPtBpYsL7R4WgiWapYzamzqNZNOcsP8",
         },
       });
       console.log(res.data);
       // console.log(token);
       if (res.data.success) {
-        navigation.dispatch(StackActions.replace("UserProfile"));
+        navigation.dispatch(StackActions.replace("HomeScreen", res.data));
       }
     } catch (error) {
       console.log(error.message);

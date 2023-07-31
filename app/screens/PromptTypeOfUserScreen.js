@@ -3,18 +3,22 @@ import { View, Text } from "react-native";
 import { TouchableOpacity } from "react-native";
 
 import { StackActions } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
 
-export default function PromptTypeOfUserScreen() {
-  const navigation = useNavigation();
+export default function PromptTypeOfUserScreen(props) {
+  const { userData } = props.route.params;
+  // console.log(userData);
+  const { navigation } = props;
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text style={{ fontSize: 20, padding: 20 }}>
         What type of user are you?
       </Text>
+
       <TouchableOpacity
         onPress={() => {
-          navigation.dispatch(StackActions.replace("ImageUploadScreen"));
+          navigation.dispatch(
+            StackActions.replace("ImageUploadScreen", userData)
+          );
         }}
       >
         <Text
@@ -31,7 +35,9 @@ export default function PromptTypeOfUserScreen() {
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => {
-          navigation.dispatch(StackActions.replace("ImageUploadScreen"));
+          navigation.dispatch(
+            StackActions.replace("ImageUploadScreen", userData)
+          );
         }}
       >
         <Text

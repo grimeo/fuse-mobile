@@ -5,7 +5,8 @@ import { View, Text, Platform, StatusBar } from "react-native";
 import HomeNavigators from "../components/HomeNavigators";
 import ChatList from "../components/ChatList";
 
-export default function ChatScreen({ navigation, text }) {
+export default function ChatScreen(props) {
+  const { navigation, text } = props;
   return (
     <View
       style={{

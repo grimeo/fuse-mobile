@@ -106,9 +106,11 @@ export default function SignUpForm({ navigation }) {
 
         // console.log(logInRes);
         if (logInRes.data.success) {
-          navigation.dispatch(StackActions.replace("PromptTypeOfUserScreen"), {
-            token: logInRes.data.token,
-          });
+          navigation.dispatch(
+            StackActions.replace("PromptTypeOfUserScreen", {
+              userData: logInRes.data,
+            })
+          );
           formikActions.resetForm();
           formikActions.setSubmitting(false);
         }

@@ -67,8 +67,7 @@ export default function loginForm({ navigation }) {
       if (!success) return updateError(res.data.message, setError);
       formikActions.resetForm();
       formikActions.setSubmitting(false);
-      console.log(User);
-      navigation.dispatch(StackActions.replace("HomeScreen"));
+      navigation.dispatch(StackActions.replace("HomeScreen", res.data));
     } catch (error) {
       console.log(error.message);
     }

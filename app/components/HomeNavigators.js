@@ -8,19 +8,23 @@ import {
 } from "react-native";
 import React from "react";
 
+import { StackActions } from "@react-navigation/native";
+
 const width = Dimensions.get("window").width;
 const homeIcon = "../assets/icons/home.png";
 const chatIcon = "../assets/icons/chat.png";
 const transactionIcon = "../assets/icons/transaction.png";
 const settingsIcon = "../assets/icons/settings.png";
 
-export default function HomeNavigators({
-  navigation,
-  isOnHomeTab,
-  isOnChatTab,
-  isOnTransactionTab,
-  isOnSettingsTab,
-}) {
+export default function HomeNavigators(props) {
+  const {
+    navigation,
+    isOnHomeTab,
+    isOnChatTab,
+    isOnTransactionTab,
+    isOnSettingsTab,
+    userData,
+  } = props;
   return (
     <View
       style={{
@@ -40,7 +44,7 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnHomeTab) {
             // refresh yung components sa baba
-          } else navigation.navigate("HomeScreen");
+          } else navigation.dispatch(StackActions.replace("HomeScreen"));
         }}
       >
         <View style={{ width: 28, height: 28 }}>
@@ -60,7 +64,7 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnChatTab) {
             // refresh yung components sa baba
-          } else navigation.replace("ChatScreen");
+          } else navigation.dispatch(StackActions.replace("ChatScreen"));
         }}
       >
         <View style={{ width: 28, height: 28 }}>
@@ -79,7 +83,7 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnTransactionTab) {
             // refresh yung components sa baba
-          } else navigation.replace("TransactionScreen");
+          } else navigation.dispatch(StackActions.replace("TransactionScreen"));
         }}
       >
         <View style={{ width: 28, height: 28 }}>
@@ -98,7 +102,10 @@ export default function HomeNavigators({
         onPress={() => {
           if (isOnSettingsTab) {
             // refresh yung components sa baba
-          } else navigation.replace("SettingsScreen");
+          } else
+            navigation.dispatch(
+              StackActions.replace("SettingsScreen", userData)
+            );
         }}
       >
         <View style={{ width: 28, height: 28 }}>
