@@ -5,8 +5,8 @@ import { TouchableOpacity } from "react-native";
 import { StackActions } from "@react-navigation/native";
 
 export default function PromptTypeOfUserScreen(props) {
-  const { userData } = props.route.params;
-  // console.log(userData);
+  const { userData, token } = props.route.params;
+  console.log(userData);
   const { navigation } = props;
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -17,7 +17,10 @@ export default function PromptTypeOfUserScreen(props) {
       <TouchableOpacity
         onPress={() => {
           navigation.dispatch(
-            StackActions.replace("ImageUploadScreen", userData)
+            StackActions.replace("ImageUploadScreen", {
+              userData: userData,
+              token: token,
+            })
           );
         }}
       >
@@ -36,7 +39,10 @@ export default function PromptTypeOfUserScreen(props) {
       <TouchableOpacity
         onPress={() => {
           navigation.dispatch(
-            StackActions.replace("ImageUploadScreen", userData)
+            StackActions.replace("ImageUploadScreen", {
+              userData: userData,
+              token: token,
+            })
           );
         }}
       >

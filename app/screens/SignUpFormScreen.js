@@ -96,7 +96,7 @@ export default function SignUpForm({ navigation }) {
 
     try {
       const res = await client.post("/create-user", { ...values });
-      console.log(res.data);
+      // console.log(res.data);
 
       if (res.data.success) {
         const logInRes = await client.post("/sign-in", {
@@ -106,9 +106,13 @@ export default function SignUpForm({ navigation }) {
 
         // console.log(logInRes);
         if (logInRes.data.success) {
+          const userData = logInRes.data.user;
+          const token = logInRes.data.token;
+          console.log(userData);
           navigation.dispatch(
             StackActions.replace("PromptTypeOfUserScreen", {
-              userData: logInRes.data,
+              userData: userData,
+              token: token,
             })
           );
           formikActions.resetForm();

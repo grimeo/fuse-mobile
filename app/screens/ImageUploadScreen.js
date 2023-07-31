@@ -9,7 +9,8 @@ import { StackActions } from "@react-navigation/native";
 function ImageUpload(props) {
   const { navigation } = props;
 
-  const { token } = props.route.params;
+  const { token, userData } = props.route.params;
+  // console.log(userData);
 
   const [Avatar, setAvatar] = useState("");
 
@@ -47,10 +48,10 @@ function ImageUpload(props) {
           authorization: "JWT " + token,
         },
       });
-      // console.log(res.data);
-      // console.log(token);
       if (res.data.success) {
-        navigation.dispatch(StackActions.replace("HomeScreen", res.data));
+        const userInfo = res.data.user;
+        console.log(userInfo);
+        navigation.dispatch(StackActions.replace("HomeScreen", userInfo));
       }
     } catch (error) {
       console.log(error.message);
@@ -77,7 +78,7 @@ function ImageUpload(props) {
         ) : null}
         <Text
           onPress={() => {
-            navigation.dispatch(StackActions.replace("HomeScreen"));
+            navigation.dispatch(StackActions.replace("HomeScreen", userData));
           }}
           style={styles.skipBtn}
         >
