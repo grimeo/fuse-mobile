@@ -3,7 +3,9 @@ import { View, Text, TouchableOpacity } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 
-export default function AddNewPost({ navigation }) {
+import { StackActions } from "@react-navigation/native";
+
+export default function AddNewPost({ userData, navigation }) {
   return (
     <View>
       <TouchableOpacity
@@ -13,7 +15,14 @@ export default function AddNewPost({ navigation }) {
           justifyContent: "flex-end",
           paddingHorizontal: 10,
         }}
-        onPress={() => navigation.navigate("PostTemplateModal")}
+        onPress={() => {
+          navigation.dispatch(
+            StackActions.push("PostTemplateModal", {
+              navigation: navigation,
+              userData: userData,
+            })
+          );
+        }}
       >
         <Text style={{ fontSize: 16 }}>Create New Post</Text>
         <View

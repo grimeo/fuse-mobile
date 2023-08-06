@@ -7,11 +7,59 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Platform } from "react-native";
 
+import { StackActions } from "@react-navigation/native";
+
+import client from "../api/client";
+
 const arrowBackIcon = "../assets/icons/arrow_back.png";
-export default function PostTemplateModal({ navigation }) {
+
+export default function PostTemplateModal(props) {
+  const { navigation } = props;
+  const { userData } = props.route.params.userData;
+  const token = props.route.params.userData.token;
+
+  const [postInfo, setPostInfo] = useState({
+    ServiceTitle: "",
+    Description: "",
+    Schedule: "",
+    Location: "",
+    Offer: "",
+    IsPostByServiceProvider: userData.isServiceProvider,
+    Avatar: userData.Avatar,
+    PostOwnerEmail: userData.Email,
+    PostOwner:
+      userData.FirstName + " " + userData.MiddleName + " " + userData.LastName,
+  });
+
+  const {
+    ServiceTitle,
+    Description,
+    Schedule,
+    Location,
+    Offer,
+    IsPostByServiceProvider,
+    Avatar,
+    PostOwner,
+    PostOwnerEmail,
+  } = postInfo;
+
+  const handleOnChangeText = (value, fieldname) => {
+    setPostInfo({ ...postInfo, [fieldname]: value });
+  };
+  const createPost = async () => {
+    try {
+      const res = await client.post("/create-post", postInfo);
+      // console.log(res.data);
+      const { success } = res.data;
+      if (!success) console.log(res.data.message);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <View
       style={{
@@ -38,7 +86,7 @@ export default function PostTemplateModal({ navigation }) {
             alignItems: "center",
           }}
           onPress={() => {
-            navigation.goBack();
+            navigation.dispatch(StackActions.pop(1));
           }}
         >
           <Image
@@ -69,6 +117,10 @@ export default function PostTemplateModal({ navigation }) {
               marginHorizontal: 10,
               borderRadius: 15,
             }}
+            onChangeText={(value) => {
+              handleOnChangeText(value, "ServiceTitle");
+            }}
+            value={ServiceTitle}
             placeholder="Service Title"
           />
           <TextInput
@@ -81,6 +133,10 @@ export default function PostTemplateModal({ navigation }) {
               marginHorizontal: 10,
               borderRadius: 15,
             }}
+            onChangeText={(value) => {
+              handleOnChangeText(value, "Description");
+            }}
+            value={Description}
             placeholder="Description"
           />
           <TextInput
@@ -92,6 +148,10 @@ export default function PostTemplateModal({ navigation }) {
               marginHorizontal: 10,
               borderRadius: 15,
             }}
+            onChangeText={(value) => {
+              handleOnChangeText(value, "Schedule");
+            }}
+            value={Schedule}
             placeholder="Schedule"
           />
           <TextInput
@@ -104,6 +164,10 @@ export default function PostTemplateModal({ navigation }) {
               marginHorizontal: 10,
               borderRadius: 15,
             }}
+            onChangeText={(value) => {
+              handleOnChangeText(value, "Location");
+            }}
+            value={Location}
             placeholder="Location"
           />
           <TextInput
@@ -115,6 +179,10 @@ export default function PostTemplateModal({ navigation }) {
               marginHorizontal: 10,
               borderRadius: 15,
             }}
+            onChangeText={(value) => {
+              handleOnChangeText(value, "Offer");
+            }}
+            value={Offer}
             placeholder="Offer"
           />
         </ScrollView>
@@ -137,7 +205,7 @@ export default function PostTemplateModal({ navigation }) {
             borderRadius: 50,
           }}
           onPress={() => {
-            //add post
+            createPost();
             navigation.goBack();
           }}
         >

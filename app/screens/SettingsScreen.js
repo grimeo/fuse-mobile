@@ -21,6 +21,7 @@ export default function SettingsScreen(props) {
   // console.log(props);
   const { navigation } = props;
   const userData = props.route.params;
+  // console.log("here", userData);
   return (
     <View style={styles.container}>
       <HomeNavigators

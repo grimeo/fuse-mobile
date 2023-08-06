@@ -45,6 +45,7 @@ export default function HomeNavigators(props) {
         onPress={() => {
           if (isOnHomeTab) {
             // refresh yung components sa baba
+            navigation.dispatch(StackActions.replace("HomeScreen"));
           } else
             navigation.dispatch(StackActions.replace("HomeScreen", userData));
         }}

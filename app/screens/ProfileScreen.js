@@ -20,10 +20,14 @@ const ScreenWidth = Dimensions.get("window").width;
 export default function ProfileScreen(props) {
   const { navigation } = props;
   const userData = props.route.params.userData;
+  const token = props.route.params.token;
+  console.log(userData.Avatar);
+
   const [isServiceProvider, setIsServiceProvider] = useState(
-    userData.userData.isServiceProvider
+    userData.IsServiceProvider
   );
   const [isVerified, setIsVerified] = useState(false);
+
   return (
     <View style={styles.container}>
       {/* back btn */}
@@ -68,19 +72,21 @@ export default function ProfileScreen(props) {
               overflow: "hidden",
             }}
           >
-            <Image
-              source={{
-                uri: userData.userData.Avatar,
-              }}
-              style={{ width: "100%", height: "100%" }}
-            />
+            {!userData.Avatar ? null : (
+              <Image
+                source={{
+                  uri: userData.Avatar,
+                }}
+                style={{ width: "100%", height: "100%" }}
+              />
+            )}
           </View>
           <Text style={{ paddingTop: 20, fontSize: 20, fontWeight: "bold" }}>
-            {userData.userData.FirstName +
+            {userData.FirstName +
               " " +
-              userData.userData.MiddleName +
+              userData.MiddleName +
               " " +
-              userData.userData.LastName}
+              userData.LastName}
           </Text>
           {isServiceProvider ? (
             <Text>Service Provider </Text>
@@ -138,7 +144,6 @@ export default function ProfileScreen(props) {
             Services
           </Text>
           {/* services */}
-          <Service userData={userData} navigation={navigation} />
         </View>
       </ScrollView>
     </View>

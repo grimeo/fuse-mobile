@@ -14,7 +14,11 @@ import { StatusBarPadding } from "../utils/Constants";
 import SentMessage from "../components/SentMessage";
 const arrowBackIcon = "../assets/icons/arrow_back.png";
 
-export default function PrivateChatScreen({ navigation }) {
+export default function PrivateChatScreen(props) {
+  const { navigation } = props;
+  const { postData } = props.route.params;
+  // console.log(postData);
+
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
 
@@ -52,10 +56,28 @@ export default function PrivateChatScreen({ navigation }) {
           />
         </TouchableOpacity>
         <Text style={{ fontSize: 18, fontWeight: "bold", marginLeft: 5 }}>
-          Juan Dela Frooze
+          {postData.PostOwner}
         </Text>
+        <TouchableOpacity
+          style={{
+            paddingHorizontal: 10,
+            paddingVertical: 3,
+            marginLeft: 50,
+            borderWidth: 1.5,
+            borderRadius: 10,
+          }}
+        >
+          <Text style={{ fontSize: 17, fontWeight: "900" }}>
+            Avail for {postData.Offer}
+          </Text>
+        </TouchableOpacity>
       </View>
       <ScrollView style={{ flex: 1 }} keyboardDismissMode="interactive">
+        {/* <Text>{postData.ServiceTitle}</Text>
+        <Text>{postData.Description}</Text>
+        <Text>{postData.Schedule}</Text>
+        <Text>{postData.Location}</Text>
+        <Text>{postData.Offer}</Text> */}
         {messages.map((item, index) => {
           return <SentMessage key={index} message={item} />;
         })}

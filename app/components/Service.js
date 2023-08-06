@@ -2,14 +2,15 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 
 import { View, Text, Dimensions, Image } from "react-native";
+import Moment from "moment";
 
 const width = Dimensions.get("window").width;
 const chatIcon = "../assets/icons/chat.png";
 
-export default function Service({ navigation, userData }) {
-  // console.log(userData);
+export default function Service({ navigation, postData, key }) {
+  // console.log(postData);
   return (
-    <View style={{ width: width, marginTop: 5, borderWidth: 1 }}>
+    <View key={key} style={{ width: width, marginTop: 5, borderWidth: 1 }}>
       <View
         style={{
           flexDirection: "row",
@@ -24,36 +25,36 @@ export default function Service({ navigation, userData }) {
             overflow: "hidden",
           }}
         >
-          <Image
-            style={{
-              width: "100%",
-              height: "100%",
-            }}
-            source={{
-              uri: userData.userData.Avatar,
-            }}
-          />
+          {!postData.Avatar ? null : (
+            <Image
+              style={{
+                width: "100%",
+                height: "100%",
+              }}
+              source={{
+                uri: postData.Avatar,
+              }}
+            />
+          )}
         </View>
         <View style={{ padding: 10 }}>
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-            {userData.userData.FirstName +
-              " " +
-              userData.userData.MiddleName +
-              " " +
-              userData.userData.LastName}
+            {postData.PostOwner}
           </Text>
-          <Text style={{ fontSize: 12 }}>September 11, 2002</Text>
+          <Text style={{ fontSize: 12 }}>
+            {Moment(postData.createdAt).format("hh:mm MM-DD-YYYY ")}
+          </Text>
         </View>
       </View>
       <View style={{}}>
         <Text style={{ fontSize: 17, paddingHorizontal: 20 }}>
-          💼 Grass Mowing
+          💼 {postData.ServiceTitle}
         </Text>
         <Text style={{ fontSize: 14, paddingHorizontal: 20 }}>
-          📌 San Jose Del Monte, Bulacan
+          📌 {postData.Location}
         </Text>
         <Text style={{ fontSize: 14, paddingHorizontal: 20 }}>
-          🕓 Saturday-Sunday 8am-5pm
+          🕓 {postData.Schedule}
         </Text>
         <Text
           style={{
@@ -64,7 +65,7 @@ export default function Service({ navigation, userData }) {
             marginBottom: 10,
           }}
         >
-          ₱ 400
+          ₱ {postData.Offer}
         </Text>
       </View>
 
@@ -102,7 +103,7 @@ export default function Service({ navigation, userData }) {
               opacity: 0.7,
             }}
             onPress={() => {
-              navigation.navigate("PrivateChatScreen");
+              navigation.navigate("PrivateChatScreen", { postData: postData });
             }}
           >
             <Image
