@@ -19,10 +19,11 @@ const ScreenWidth = Dimensions.get("window").width;
 
 export default function ProfileScreen(props) {
   const { navigation } = props;
-  const userInfo = props.route.params;
-  // console.log(userInfo);
-  const [isServiceProvider, setIsServiceProvider] = useState(true);
-  const [isVerified, setIsVerified] = useState(true);
+  const userData = props.route.params.userData;
+  const [isServiceProvider, setIsServiceProvider] = useState(
+    userData.userData.isServiceProvider
+  );
+  const [isVerified, setIsVerified] = useState(false);
   return (
     <View style={styles.container}>
       {/* back btn */}
@@ -69,19 +70,23 @@ export default function ProfileScreen(props) {
           >
             <Image
               source={{
-                uri: userInfo.Avatar,
+                uri: userData.userData.Avatar,
               }}
               style={{ width: "100%", height: "100%" }}
             />
           </View>
           <Text style={{ paddingTop: 20, fontSize: 20, fontWeight: "bold" }}>
-            {userInfo.FirstName +
+            {userData.userData.FirstName +
               " " +
-              userInfo.MiddleName +
+              userData.userData.MiddleName +
               " " +
-              userInfo.LastName}
+              userData.userData.LastName}
           </Text>
-          {isServiceProvider ? <Text>Service Provider </Text> : null}
+          {isServiceProvider ? (
+            <Text>Service Provider </Text>
+          ) : (
+            <Text> Client </Text>
+          )}
           {isVerified ? <Text>Verified </Text> : null}
         </View>
 
@@ -133,9 +138,7 @@ export default function ProfileScreen(props) {
             Services
           </Text>
           {/* services */}
-          <Service userData={userInfo} navigation={navigation} />
-          <Service userData={userInfo} navigation={navigation} />
-          <Service userData={userInfo} navigation={navigation} />
+          <Service userData={userData} navigation={navigation} />
         </View>
       </ScrollView>
     </View>

@@ -5,6 +5,7 @@ import { View, Text, TouchableOpacity, Image, Dimensions } from "react-native";
 const width = Dimensions.get("window").width;
 
 export default function ProfileBtn({ navigation, userData }) {
+  console.log(userData);
   return (
     <TouchableOpacity
       style={{
@@ -18,7 +19,7 @@ export default function ProfileBtn({ navigation, userData }) {
         paddingVertical: 5,
       }}
       onPress={() => {
-        navigation.navigate("ProfileScreen", userData);
+        navigation.navigate("ProfileScreen", { userData: userData });
         // console.log(userData);
       }}
     >
@@ -30,16 +31,16 @@ export default function ProfileBtn({ navigation, userData }) {
             borderRadius: 45 / 2,
           }}
           source={{
-            uri: userData.Avatar,
+            uri: userData.userData.Avatar,
           }}
         />
       </View>
       <Text style={{ fontSize: 20, paddingLeft: 20 }}>
-        {userData.FirstName +
+        {userData.userData.FirstName +
           " " +
-          userData.MiddleName +
+          userData.userData.MiddleName +
           " " +
-          userData.LastName}
+          userData.userData.LastName}
       </Text>
     </TouchableOpacity>
   );

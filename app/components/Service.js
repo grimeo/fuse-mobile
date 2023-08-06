@@ -30,17 +30,17 @@ export default function Service({ navigation, userData }) {
               height: "100%",
             }}
             source={{
-              uri: userData.Avatar,
+              uri: userData.userData.Avatar,
             }}
           />
         </View>
         <View style={{ padding: 10 }}>
           <Text style={{ fontSize: 16, fontWeight: "bold" }}>
-            {userData.FirstName +
+            {userData.userData.FirstName +
               " " +
-              userData.MiddleName +
+              userData.userData.MiddleName +
               " " +
-              userData.LastName}
+              userData.userData.LastName}
           </Text>
           <Text style={{ fontSize: 12 }}>September 11, 2002</Text>
         </View>

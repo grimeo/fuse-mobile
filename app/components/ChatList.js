@@ -7,9 +7,6 @@ export default function ChatList({ navigation }) {
   return (
     <ScrollView style={{ flex: 1 }}>
       <ChatConversation navigation={navigation} />
-      <ChatConversation navigation={navigation} />
-      <ChatConversation navigation={navigation} />
-      <ChatConversation navigation={navigation} />
     </ScrollView>
   );
 }

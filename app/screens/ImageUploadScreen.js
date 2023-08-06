@@ -8,9 +8,11 @@ import { StackActions } from "@react-navigation/native";
 
 function ImageUpload(props) {
   const { navigation } = props;
+  console.log(props);
+  const userData = props.route.params.userData;
+  const token = props.route.params.token;
 
-  const { token, userData } = props.route.params;
-  // console.log(userData);
+  // const { token } = props.route.params;
 
   const [Avatar, setAvatar] = useState("");
 
@@ -48,10 +50,15 @@ function ImageUpload(props) {
           authorization: "JWT " + token,
         },
       });
+      console.log(res.data);
+      // console.log(token);
       if (res.data.success) {
-        const userInfo = res.data.user;
-        console.log(userInfo);
-        navigation.dispatch(StackActions.replace("HomeScreen", userInfo));
+        navigation.dispatch(
+          StackActions.replace("HomeScreen", {
+            userData: res.data.user,
+            token: token,
+          })
+        );
       }
     } catch (error) {
       console.log(error.message);
@@ -78,7 +85,12 @@ function ImageUpload(props) {
         ) : null}
         <Text
           onPress={() => {
-            navigation.dispatch(StackActions.replace("HomeScreen", userData));
+            navigation.dispatch(
+              StackActions.replace("HomeScreen", {
+                userData: res.data.user,
+                token: token,
+              })
+            );
           }}
           style={styles.skipBtn}
         >

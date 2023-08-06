@@ -35,9 +35,6 @@ export default function HomeScreen(props) {
         <ServicesContainer navigation={navigation}>
           <AddNewPostBtn navigation={navigation} />
           <Service userData={userData} navigation={navigation} />
-          <Service userData={userData} navigation={navigation} />
-          <Service userData={userData} navigation={navigation} />
-          <Service userData={userData} navigation={navigation} />
         </ServicesContainer>
       </View>
     </View>

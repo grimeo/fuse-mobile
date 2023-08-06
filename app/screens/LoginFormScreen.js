@@ -59,16 +59,20 @@ export default function loginForm({ navigation }) {
   // };
 
   const logIn = async (values, formikActions) => {
-    console.log(values);
+    console.log("login", values);
     try {
       const res = await client.post("/sign-in", { ...values });
-      console.log(res.data);
+      // console.log(res.data);
       const { success } = res.data;
       if (!success) return updateError(res.data.message, setError);
       formikActions.resetForm();
       formikActions.setSubmitting(false);
-      const userData = res.data.user;
-      navigation.dispatch(StackActions.replace("HomeScreen", userData));
+      navigation.dispatch(
+        StackActions.replace("HomeScreen", {
+          userData: res.data.user,
+          token: res.data.token,
+        })
+      );
     } catch (error) {
       console.log(error.message);
     }

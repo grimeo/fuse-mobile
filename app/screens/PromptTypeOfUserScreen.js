@@ -4,26 +4,82 @@ import { TouchableOpacity } from "react-native";
 
 import { StackActions } from "@react-navigation/native";
 
+import client from "../api/client";
+
 export default function PromptTypeOfUserScreen(props) {
-  const { userData, token } = props.route.params;
-  console.log(userData);
   const { navigation } = props;
+  const userData = props.route.params.userData;
+  const token = props.route.params.token;
+  // console.log("userdata", userData);
+
+  const setProvider = async () => {
+    try {
+      const res = await client.post(
+        "/set-usertype",
+        {
+          isServiceProvider: true,
+          user: userData,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: "JWT " + token,
+          },
+        }
+      );
+
+      console.log(res.data);
+      const { success } = res.data;
+      if (!success) console.log(res.data.message);
+
+      navigation.dispatch(
+        StackActions.replace("ImageUploadScreen", {
+          userData: res.data.user,
+          token: token,
+        })
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  const setClient = async () => {
+    try {
+      const res = await client.post(
+        "/set-usertype",
+        {
+          isServiceProvider: false,
+          user: userData,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: "JWT " + token,
+          },
+        }
+      );
+
+      console.log(res.data.user);
+      const { success } = res.data;
+      if (!success) console.log(res.data.message);
+
+      navigation.dispatch(
+        StackActions.replace("ImageUploadScreen", {
+          userData: res.data.user,
+          token: token,
+        })
+      );
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text style={{ fontSize: 20, padding: 20 }}>
         What type of user are you?
       </Text>
-
-      <TouchableOpacity
-        onPress={() => {
-          navigation.dispatch(
-            StackActions.replace("ImageUploadScreen", {
-              userData: userData,
-              token: token,
-            })
-          );
-        }}
-      >
+      <TouchableOpacity onPress={setProvider}>
         <Text
           style={{
             fontSize: 18,
@@ -36,16 +92,7 @@ export default function PromptTypeOfUserScreen(props) {
           Service Provider
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.dispatch(
-            StackActions.replace("ImageUploadScreen", {
-              userData: userData,
-              token: token,
-            })
-          );
-        }}
-      >
+      <TouchableOpacity onPress={setClient}>
         <Text
           style={{
             fontSize: 18,
